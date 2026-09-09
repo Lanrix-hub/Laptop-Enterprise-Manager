@@ -308,7 +308,7 @@ public:
     }
 
     void Finance() {
-        int choice, 
+        int choice,
             choiceCST;
         double
             monthlyIncome = 0,
@@ -351,25 +351,22 @@ public:
             double monthlyProfitTAX = monthlyIncomeTAX - monthlyExpenses;
 
 
-            cout << "\nВведите на сколько месяцев вперёд вы хотите расчитать доход/расход/прибыль\n";
-            cout << "Ваше число --> ";
-            cin >> choice;
-            if (cin.fail()) {
-                cin.clear();
-                cin.ignore(32767, '\n');
-                cout << "Неверный ввод.\n";
-                return;
-            }
-
             for (int i = 0; i < 42; i++)
             {
                 cout << "#";
             }
             tab_line();
 
-            cout << "\nВведите на сколько месяцев вперёд вы хотите расчитать доход/расход/прибыль\n";
+            cout << "\nВведите на сколько месяцев вперёд вы хотите расчитать доход/расход/прибыль, а затем через пробел, налог.\n";
             cout << "Ваше число --> ";
-            cin >> choice;
+            cin >> choice >> choiceCST;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(32767, '\n');
+                cout << "Неверный ввод.\n";
+                return;
+            }
+            
             tab_6();
             cout << "   Ежемесячный доход(Без налогов): " << monthlyIncome << "\n";
             cout << "   Ежемесячный доход(C налогами): " << monthlyIncomeTAX << "\n";
@@ -391,10 +388,6 @@ public:
             tab_6();
 
 
-            for (int i = 0; i < 42; i++)
-            {
-                cout << "#";
-            }
             tab_line_x2();
 
             return;
@@ -915,7 +908,7 @@ int main() {
 
             choice = static_cast<unsigned int>(tempChoice);
         }
-        catch (const out_of_range&) { 
+        catch (const out_of_range&) {
             cout << "\nЧисло слишком велико. Попробуйте снова!\n";
             continue;
         }
@@ -1116,7 +1109,7 @@ int main() {
         case 13:
             company.cls();
             if (company.salesPointCount > 0) {
-                cout << "Ваши торговые точки:\n"; 
+                cout << "Ваши торговые точки:\n";
                 company.print_SalesPoint();
                 cout << "Введите через пробел название точки продаж, новую цену одного ноутбука: ";
                 cin >> name;
@@ -1212,4 +1205,4 @@ int main() {
             break;
         }
     }
-}   
+}
