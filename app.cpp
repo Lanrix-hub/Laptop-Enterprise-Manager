@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <windows.h>
 
 using namespace std;
 
@@ -713,9 +714,11 @@ public:
 
 int main() {
     setlocale(LC_ALL, "ru");
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
     Company company;
     string name, input;
-    long long production, workers;
+    int production, workers;
     double cost, price, salary;
     unsigned int choice;
 
