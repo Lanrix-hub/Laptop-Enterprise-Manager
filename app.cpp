@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <limits>
 
 using namespace std;
 
@@ -66,10 +67,8 @@ public:
     int getAccessoryCount() const { return accessoryCount; }
 
     void AddFactory(const string& name, int laptopsProduced, double workerSalary, int workers) {
-        for (int i = 0; i < factoryCount; i++)
-        {
-            if (factories[i].name == name)
-            {
+        for (int i = 0; i < factoryCount; i++) {
+            if (factories[i].name == name) {
                 cout << "\nЗавод " << name << " с таким названием уже есть.\n";
                 return;
             }
@@ -84,10 +83,8 @@ public:
     }
 
     void AddSupplier(const string& name, double cost) {
-        for (int i = 0; i < supplierCount; i++)
-        {
-            if (suppliers[i].name == name)
-            {
+        for (int i = 0; i < supplierCount; i++) {
+            if (suppliers[i].name == name) {
                 cout << "\nПоставщик " << name << " с таким названием уже есть.\n";
                 return;
             }
@@ -102,10 +99,8 @@ public:
     }
 
     void AddSalesPoint(const string& name, double price) {
-        for (int i = 0; i < salesPointCount; i++)
-        {
-            if (salesPoints[i].name == name)
-            {
+        for (int i = 0; i < salesPointCount; i++) {
+            if (salesPoints[i].name == name) {
                 cout << "\nТорговая точка " << name << " с таким названием уже есть.\n";
                 return;
             }
@@ -120,10 +115,8 @@ public:
     }
 
     void AddEquipmentFactory(const string& name, double cost) {
-        for (int i = 0; i < equipmentFactoryCount; i++)
-        {
-            if (equipmentFactories[i].name == name)
-            {
+        for (int i = 0; i < equipmentFactoryCount; i++) {
+            if (equipmentFactories[i].name == name) {
                 cout << "\nЗавод оборудования " << name << " с таким названием уже есть.\n";
                 return;
             }
@@ -138,10 +131,8 @@ public:
     }
 
     void AddAccessory(const string& name, double price, int accessoryProducedMonth) {
-        for (int i = 0; i < accessoryCount; i++)
-        {
-            if (accessories[i].name == name)
-            {
+        for (int i = 0; i < accessoryCount; i++) {
+            if (accessories[i].name == name) {
                 cout << "\nАксессуар " << name << " с таким названием уже есть.\n";
                 return;
             }
@@ -309,13 +300,8 @@ public:
     }
 
     void Finance() {
-        int choice,
-            choiceCST;
-        double
-            monthlyIncome = 0,
-            monthlyExpenses = 0,
-            monthlyIncomeTAX = 0,
-            percent = 0.13;
+        int choice, choiceCST;
+        double monthlyIncome = 0, monthlyExpenses = 0, monthlyIncomeTAX = 0, percent = 0.13;
 
         if (getFactoryCount() > 0 || getSupplierCount() > 0 || getSalesPointCount() > 0 || getEquipmentFactoryCount() > 0 || getAccessoryCount() > 0) {
             for (int i = 0; i < factoryCount; ++i) {
@@ -351,359 +337,297 @@ public:
             double monthlyProfit = monthlyIncome - monthlyExpenses;
             double monthlyProfitTAX = monthlyIncomeTAX - monthlyExpenses;
 
-
-            for (int i = 0; i < 42; i++)
-            {
+            for (int i = 0; i < 42; i++) {
                 cout << "#";
             }
-            tab_line();
+            cout << "\n";
 
             cout << "\nВведите на сколько месяцев вперёд вы хотите расчитать доход/расход/прибыль\n";
             cout << "Ваше число --> ";
             cin >> choice;
-            cout << "Введите ваш налог -->";
-            cin >> choiceCST;
-            if (cin.fail()) {
+            if (cin.fail() || choice < 0) {
                 cin.clear();
                 cin.ignore(32767, '\n');
                 cout << "Неверный ввод.\n";
                 return;
             }
-            
-            tab_6();
+            cout << "Введите ваш налог -->";
+            cin >> choiceCST;
+            if (cin.fail() || choiceCST < 0) {
+                cin.clear();
+                cin.ignore(32767, '\n');
+                cout << "Неверный ввод.\n";
+                return;
+            }
+
+            cout << "                                   \n";
             cout << "   Ежемесячный доход(Без налогов): " << monthlyIncome << "\n";
             cout << "   Ежемесячный доход(C налогами): " << monthlyIncomeTAX << "\n";
             cout << "   Ежемесячные расходы: " << monthlyExpenses << "\n";
             cout << "   Ежемесячная прибыль(Без налогов): " << monthlyProfit << "\n";
             cout << "   Ежемесячная прибыль(С налогом): " << monthlyProfitTAX << "\n";
-            tab_6();
+            cout << "                                   \n";
             cout << "   Годовой доход(Без налогов): " << monthlyIncome * 12 << "\n";
             cout << "   Годовой доход(С налогами): " << monthlyIncomeTAX * 12 << "\n";
             cout << "   Годовые расходы: " << monthlyExpenses * 12 << "\n";
             cout << "   Годовая прибыль(Без налогов): " << monthlyProfit * 12 << "\n";
             cout << "   Годовая прибыль(С налогами): " << monthlyProfitTAX * 12 << "\n";
-            tab_6();
+            cout << "                                   \n";
             cout << "   Кастомный доход(Без налогов): " << monthlyIncome * choiceCST << "\n";
             cout << "   Кастомный доход(С налогами): " << monthlyIncomeTAX * choiceCST << "\n";
             cout << "   Кастомный расходы: " << monthlyExpenses * choiceCST << "\n";
             cout << "   Кастомный прибыль(Без налогов): " << monthlyProfit * choiceCST << "\n";
             cout << "   Кастомный прибыль(С налогами): " << monthlyProfitTAX * choiceCST << "\n";
-            tab_6();
-
-
-            tab_line_x2();
-
+            cout << "                                   \n";
+            cout << "\n\n";
             return;
         }
-        else
-        {
+        else {
             cout << "У вас ничего нету!\n\n";
         }
     }
 
-
     void print_Factory() {
-        for (int i = 0; i < factoryCount; i++)
-        {
+        for (int i = 0; i < factoryCount; i++) {
             cout << factories[i].name << endl;
         }
     }
 
     void print_Supplier() {
-        for (int i = 0; i < supplierCount; i++)
-        {
+        for (int i = 0; i < supplierCount; i++) {
             cout << suppliers[i].name << endl;
         }
     }
 
     void print_SalesPoint() {
-        for (int i = 0; i < salesPointCount; i++)
-        {
+        for (int i = 0; i < salesPointCount; i++) {
             cout << salesPoints[i].name << endl;
         }
     }
 
     void print_EquipmentFactory() {
-        for (int i = 0; i < equipmentFactoryCount; i++)
-        {
+        for (int i = 0; i < equipmentFactoryCount; i++) {
             cout << equipmentFactories[i].name << endl;
         }
     }
 
     void print_Accessory() {
-        for (int i = 0; i < accessoryCount; i++)
-        {
+        for (int i = 0; i < accessoryCount; i++) {
             cout << accessories[i].name << endl;
         }
     }
 
-
     void print_Factory_show() {
-        if (factoryCount > 0)
-        {
-            for (int i = 0; i < factoryCount; i++)
-            {
-                cout << "Ваши заводы:\n";
+        if (factoryCount > 0) {
+            cout << "Ваши заводы:\n";
+            for (int i = 0; i < factoryCount; i++) {
                 cout << i << ". " << factories[i].name << endl;
             }
         }
-        else
-        {
+        else {
             cout << "У вас нету заводов.\n";
         }
-
     }
 
     void print_Supplier_show() {
-        if (supplierCount > 0)
-        {
-            for (int i = 0; i < supplierCount; i++)
-            {
-                cout << "Ваши поставщики:\n";
+        if (supplierCount > 0) {
+            cout << "Ваши поставщики:\n";
+            for (int i = 0; i < supplierCount; i++) {
                 cout << i << ". " << suppliers[i].name << endl;
             }
         }
-        else
-        {
+        else {
             cout << "У вас нету поставщиков.\n";
         }
-
     }
 
     void print_SalesPoint_show() {
-        if (salesPointCount > 0)
-        {
-            for (int i = 0; i < salesPointCount; i++)
-            {
-                cout << "Ваши торговые точки:\n";
+        if (salesPointCount > 0) {
+            cout << "Ваши торговые точки:\n";
+            for (int i = 0; i < salesPointCount; i++) {
                 cout << i << ". " << salesPoints[i].name << endl;
             }
         }
-        else
-        {
+        else {
             cout << "У вас нету торговых точек.\n";
         }
-
     }
 
     void print_Equipment_Factory_show() {
-        if (equipmentFactoryCount > 0)
-        {
-            for (int i = 0; i < equipmentFactoryCount; i++)
-            {
-                cout << "Ваши заводы оборудования:\n";
+        if (equipmentFactoryCount > 0) {
+            cout << "Ваши заводы оборудования:\n";
+            for (int i = 0; i < equipmentFactoryCount; i++) {
                 cout << i << ". " << equipmentFactories[i].name << endl;
             }
         }
-        else
-        {
+        else {
             cout << "У вас нету заводов оборудования.\n";
         }
-
     }
 
     void print_Accessory_show() {
-        if (accessoryCount > 0)
-        {
-            for (int i = 0; i < accessoryCount; i++)
-            {
-                cout << "Ваши аксессуары:\n";
+        if (accessoryCount > 0) {
+            cout << "Ваши аксессуары:\n";
+            for (int i = 0; i < accessoryCount; i++) {
                 cout << i << ". " << accessories[i].name << endl;
             }
         }
-        else
-        {
+        else {
             cout << "У вас нету аксессуаров.\n";
         }
-
     }
-
 
     void print_Factory_Characteristics() {
         int choice;
-        if (factoryCount > 0)
-        {
+        if (factoryCount > 0) {
             cout << "Ваши заводы:\n";
-            for (int i = 0; i < factoryCount; i++)
-            {
-
+            for (int i = 0; i < factoryCount; i++) {
                 cout << i << ". " << factories[i].name << endl;
             }
         }
-        else
-        {
+        else {
             cout << "У вас нету заводов.\n";
+            return;
         }
         cout << "Выберите завод\n";
         cout << "Ваше число --> ";
         cin >> choice;
-
-        tab_line();
-
-        if (choice >= 0 && choice < max_items)
-        {
-            Factory factory = factories[choice];
-            cout << "Характеристики завода\n";
-            cout << "Имя: " << factory.name << endl;
-            cout << "Количество рабочих: " << factory.workers << endl;
-            cout << "Зарплата рабочего: " << factory.workerSalary << endl;
-            cout << "Количество произведённых ноутбуков в месяц: " << factory.laptopsProducedMonth << endl;
-            tab_line();
+        if (cin.fail() || choice < 0 || choice >= factoryCount) {
+            cin.clear();
+            cin.ignore(32767, '\n');
+            cout << "Неверный ввод.\n";
             return;
         }
+
+        cout << "\n";
+        Factory factory = factories[choice];
+        cout << "Характеристики завода\n";
+        cout << "Имя: " << factory.name << endl;
+        cout << "Количество рабочих: " << factory.workers << endl;
+        cout << "Зарплата рабочего: " << factory.workerSalary << endl;
+        cout << "Количество произведённых ноутбуков в месяц: " << factory.laptopsProducedMonth << endl;
+        cout << "\n";
     }
 
     void print_Supplier_Characteristics() {
         int choice;
-        if (supplierCount > 0)
-        {
+        if (supplierCount > 0) {
             cout << "Ваши поставщики:\n";
-            for (int i = 0; i < supplierCount; i++)
-            {
-
+            for (int i = 0; i < supplierCount; i++) {
                 cout << i << ". " << suppliers[i].name << endl;
             }
         }
-        else
-        {
+        else {
             cout << "У вас нету поставщиков.\n";
+            return;
         }
         cout << "Выберите поставщиков\n";
         cout << "Ваше число --> ";
         cin >> choice;
-        tab_line();
-
-        if (choice >= 0 && choice < max_items)
-        {
-            Supplier supplier = suppliers[choice];
-            cout << "Характеристики поставщика\n";
-            cout << "Имя: " << supplier.name << endl;
-            cout << "Цена поставщика: " << supplier.cost << endl;
-            tab_line();
+        if (cin.fail() || choice < 0 || choice >= supplierCount) {
+            cin.clear();
+            cin.ignore(32767, '\n');
+            cout << "Неверный ввод.\n";
             return;
         }
+        cout << "\n";
+
+        Supplier supplier = suppliers[choice];
+        cout << "Характеристики поставщика\n";
+        cout << "Имя: " << supplier.name << endl;
+        cout << "Цена поставщика: " << supplier.cost << endl;
+        cout << "\n";
     }
 
     void print_Sales_Point_Characteristics() {
         int choice;
-        if (salesPointCount > 0)
-        {
+        if (salesPointCount > 0) {
             cout << "Ваши торговые точки:\n";
-            for (int i = 0; i < salesPointCount; i++)
-            {
-
+            for (int i = 0; i < salesPointCount; i++) {
                 cout << i << ". " << salesPoints[i].name << endl;
             }
         }
-        else
-        {
+        else {
             cout << "У вас нету торговых точек.\n";
+            return;
         }
         cout << "Выберите торговую точку\n";
         cout << "Ваше число --> ";
         cin >> choice;
-        tab_line();
-
-        if (choice >= 0 && choice < max_items)
-        {
-            SalesPoint salepoint = salesPoints[choice];
-            cout << "Характеристики торговой точки\n";
-            cout << "Имя: " << salepoint.name << endl;
-            cout << "Цена ноутбукка: " << salepoint.priceLaptop << endl;
-            tab_line();
+        if (cin.fail() || choice < 0 || choice >= salesPointCount) {
+            cin.clear();
+            cin.ignore(32767, '\n');
+            cout << "Неверный ввод.\n";
             return;
         }
+        cout << "\n";
+
+        SalesPoint salepoint = salesPoints[choice];
+        cout << "Характеристики торговой точки\n";
+        cout << "Имя: " << salepoint.name << endl;
+        cout << "Цена ноутбукка: " << salepoint.priceLaptop << endl;
+        cout << "\n";
     }
 
     void print_Equipment_Factory_Characteristics() {
         int choice;
-        if (equipmentFactoryCount > 0)
-        {
+        if (equipmentFactoryCount > 0) {
             cout << "Ваши заводы оборудования:\n";
-            for (int i = 0; i < equipmentFactoryCount; i++)
-            {
-
+            for (int i = 0; i < equipmentFactoryCount; i++) {
                 cout << i << ". " << equipmentFactories[i].name << endl;
             }
         }
-        else
-        {
+        else {
             cout << "У вас нету заводов оборудования.\n";
+            return;
         }
         cout << "Выберите завод оборудования\n";
         cout << "Ваше число --> ";
         cin >> choice;
-        tab_line();
-
-        if (choice >= 0 && choice < max_items)
-        {
-            EquipmentFactory equipmentFactory = equipmentFactories[choice];
-            cout << "Характеристики завода оборудования\n";
-            cout << "Имя: " << equipmentFactory.name << endl;
-            cout << "Цена завода оборудования: " << equipmentFactory.cost << endl;
-            tab_line();
+        if (cin.fail() || choice < 0 || choice >= equipmentFactoryCount) {
+            cin.clear();
+            cin.ignore(32767, '\n');
+            cout << "Неверный ввод.\n";
             return;
         }
+        cout << "\n";
+
+        EquipmentFactory equipmentFactory = equipmentFactories[choice];
+        cout << "Характеристики завода оборудования\n";
+        cout << "Имя: " << equipmentFactory.name << endl;
+        cout << "Цена завода оборудования: " << equipmentFactory.cost << endl;
+        cout << "\n";
     }
 
     void print_Accessory_Characteristics() {
         int choice;
-        if (accessoryCount > 0)
-        {
+        if (accessoryCount > 0) {
             cout << "Ваши аксессуары:\n";
-            for (int i = 0; i < accessoryCount; i++)
-            {
-
+            for (int i = 0; i < accessoryCount; i++) {
                 cout << i << ". " << accessories[i].name << endl;
             }
         }
-        else
-        {
+        else {
             cout << "У вас нету аксессуаров.\n";
+            return;
         }
         cout << "Выберите аксессуар\n";
         cout << "Ваше число --> ";
         cin >> choice;
-        tab_line();
-
-        if (choice >= 0 && choice < max_items)
-        {
-            Accessory accessory = accessories[choice];
-            cout << "Характеристики аксессуара\n";
-            cout << "Имя:" << accessory.name << endl;
-            cout << "Количество произведённых аксессуаров в месяц: " << accessory.accessoryProducedMonth << endl;
-            cout << "Цена аксессуара: " << accessory.price << endl;
-            tab_line();
+        if (cin.fail() || choice < 0 || choice >= accessoryCount) {
+            cin.clear();
+            cin.ignore(32767, '\n');
+            cout << "Неверный ввод.\n";
             return;
         }
-    }
-
-    void tab_1() {
-        cout << "                   ";
-    }
-    void tab_2() {
-        cout << "                ";
-    }
-    void tab_3() {
-        cout << "                 ";
-    }
-    void tab_4() {
-        cout << "                  ";
-    }
-    void tab_5() {
-        cout << "        ";
-    }
-    void tab_6() {
-        cout << "                                   " << "\n";
-    }
-    void tab_7() {
-        cout << "              ";
-    }
-    void tab_line() {
         cout << "\n";
-    }
-    void tab_line_x2() {
-        cout << "\n\n";
+
+        Accessory accessory = accessories[choice];
+        cout << "Характеристики аксессуара\n";
+        cout << "Имя:" << accessory.name << endl;
+        cout << "Количество произведённых аксессуаров в месяц: " << accessory.accessoryProducedMonth << endl;
+        cout << "Цена аксессуара: " << accessory.price << endl;
+        cout << "\n";
     }
 
     void cls() {
@@ -723,27 +647,24 @@ int main() {
     unsigned int choice;
 
     while (true) {
-        for (int i = 0; i < 42; i++)
-        {
+        for (int i = 0; i < 42; i++) {
             cout << "#";
         }
-        company.tab_line();
-        company.tab_1();
+        cout << "\n";
+        cout << "                   ";
         cout << "Меню\n";
-        for (int i = 0; i < 42; i++)
-        {
+        for (int i = 0; i < 42; i++) {
             cout << "#";
         }
-        company.tab_line();
-        company.tab_2();
+        cout << "\n";
+        cout << "                ";
         cout << "Добавление\n";
-        company.tab_6();
+        cout << "                                   \n";
 
         if (company.getFactoryCount() >= max_items || company.getSupplierCount() >= max_items || company.getSalesPointCount() >= max_items || company.getEquipmentFactoryCount() >= max_items || company.getAccessoryCount() >= max_items) {
             cout << "У вас лимит по items\n";
         }
-        else
-        {
+        else {
             if (company.getFactoryCount() < max_items)
                 cout << "1. Добавить завод\n";
             if (company.getSupplierCount() < max_items)
@@ -755,17 +676,16 @@ int main() {
             if (company.getAccessoryCount() < max_items)
                 cout << "5. Добавить аксессуар\n";
         }
-        company.tab_6();
+        cout << "                                   \n";
 
-        for (int i = 0; i < 42; i++)
-        {
+        for (int i = 0; i < 42; i++) {
             cout << "#";
         }
 
-        company.tab_line();
-        company.tab_3();
+        cout << "\n";
+        cout << "                 ";
         cout << "Удаление\n";
-        company.tab_6();
+        cout << "                                   \n";
         if (company.getFactoryCount() > 0 || company.getSupplierCount() > 0 || company.getSalesPointCount() > 0 || company.getEquipmentFactoryCount() > 0 || company.getAccessoryCount() > 0) {
             if (company.getFactoryCount() > 0)
                 cout << "6. Удалить завод\n";
@@ -778,21 +698,19 @@ int main() {
             if (company.getAccessoryCount() > 0)
                 cout << "10. Удалить аксессуар\n";
         }
-        else
-        {
-            company.tab_5();
+        else {
+            cout << "        ";
             cout << "У вас пока что нечего нету\n";
         }
-        company.tab_6();
-        for (int i = 0; i < 42; i++)
-        {
+        cout << "                                   \n";
+        for (int i = 0; i < 42; i++) {
             cout << "#";
         }
-        company.tab_line();
+        cout << "\n";
 
-        company.tab_3();
+        cout << "                 ";
         cout << "Изменить\n";
-        company.tab_6();
+        cout << "                                   \n";
         if (company.getFactoryCount() > 0 || company.getSupplierCount() > 0 || company.getSalesPointCount() > 0 || company.getEquipmentFactoryCount() > 0 || company.getAccessoryCount() > 0) {
             if (company.getFactoryCount() > 0)
                 cout << "11. Изменить информацию завода\n";
@@ -805,21 +723,19 @@ int main() {
             if (company.getAccessoryCount() > 0)
                 cout << "15. Изменить информацию аксессуара\n";
         }
-        else
-        {
-            company.tab_5();
+        else {
+            cout << "        ";
             cout << "У вас пока что нечего нету\n";
         }
-        company.tab_6();
-        for (int i = 0; i < 42; i++)
-        {
+        cout << "                                   \n";
+        for (int i = 0; i < 42; i++) {
             cout << "#";
         }
-        company.tab_line();
+        cout << "\n";
 
-        company.tab_3();
+        cout << "                 ";
         cout << "Показать\n";
-        company.tab_6();
+        cout << "                                   \n";
         if (company.getFactoryCount() > 0 || company.getSupplierCount() > 0 || company.getSalesPointCount() > 0 || company.getEquipmentFactoryCount() > 0 || company.getAccessoryCount() > 0) {
             if (company.getFactoryCount() > 0)
                 cout << "16. Показать названия заводов\n";
@@ -832,21 +748,19 @@ int main() {
             if (company.getAccessoryCount() > 0)
                 cout << "20. Показать названия аксессуаров\n";
         }
-        else
-        {
-            company.tab_5();
+        else {
+            cout << "        ";
             cout << "У вас пока что нечего нету\n";
         }
-        company.tab_6();
+        cout << "                                   \n";
 
-        for (int i = 0; i < 42; i++)
-        {
+        for (int i = 0; i < 42; i++) {
             cout << "#";
         }
-        company.tab_line();
-        company.tab_7();
+        cout << "\n";
+        cout << "              ";
         cout << "Характеристики\n";
-        company.tab_6();
+        cout << "                                   \n";
         if (company.getFactoryCount() > 0 || company.getSupplierCount() > 0 || company.getSalesPointCount() > 0 || company.getEquipmentFactoryCount() > 0 || company.getAccessoryCount() > 0) {
             if (company.getFactoryCount() > 0)
                 cout << "21. Показать характеристики заводов\n";
@@ -859,33 +773,30 @@ int main() {
             if (company.getAccessoryCount() > 0)
                 cout << "25. Показать характеристики аксессуаров\n";
         }
-        else
-        {
-            company.tab_5();
+        else {
+            cout << "        ";
             cout << "У вас пока что нечего нету\n";
         }
-        company.tab_6();
-        for (int i = 0; i < 42; i++)
-        {
+        cout << "                                   \n";
+        for (int i = 0; i < 42; i++) {
             cout << "#";
         }
-        company.tab_line();
+        cout << "\n";
 
-        company.tab_4();
+        cout << "                  ";
         cout << "Прочее\n";
-        company.tab_6();
+        cout << "                                   \n";
         if (company.getFactoryCount() > 0 || company.getSupplierCount() > 0 || company.getSalesPointCount() > 0 || company.getEquipmentFactoryCount() > 0 || company.getAccessoryCount() > 0)
             cout << "26. Подсчитать финансы\n";
 
         cout << "27. Выход\n";
         cout << "28. Очистить консоль\n";
 
-        company.tab_6();
-        for (int i = 0; i < 42; i++)
-        {
+        cout << "                                   \n";
+        for (int i = 0; i < 42; i++) {
             cout << "#";
         }
-        company.tab_line();
+        cout << "\n";
         cout << "Выберите действие --> ";
 
         bool invalid = false;
@@ -922,7 +833,7 @@ int main() {
             continue;
         }
 
-        company.tab_line();
+        cout << "\n";
 
         switch (choice) {
         case 1:
@@ -930,9 +841,33 @@ int main() {
             if (company.factoryCount < max_items) {
                 cout << "Введите через пробел имя завода, колво ноутбуков производимых в месяц, зп работника, колво работников: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> production;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> salary;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> workers;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 if (production < 0 || salary < 0 || workers < 0) {
                     cout << "Минусовые значения/буквы для числа запрещены.\n";
                     break;
@@ -948,7 +883,19 @@ int main() {
             if (company.supplierCount < max_items) {
                 cout << "Введите через пробел имя поставщика, стоимость поставщика: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> cost;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 if (cost < 0) {
                     cout << "Минусовые значения/буквы для числа запрещены.\n";
                     break;
@@ -964,7 +911,19 @@ int main() {
             if (company.salesPointCount < max_items) {
                 cout << "Введите через пробел название точки продаж, цену одного ноутбука: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> price;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 if (price < 0) {
                     cout << "Минусовые значения/буквы для числа запрещены.\n";
                     break;
@@ -980,7 +939,19 @@ int main() {
             if (company.equipmentFactoryCount < max_items) {
                 cout << "Введите через пробел название точки продаж, цену оборудования: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> cost;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 if (cost < 0) {
                     cout << "Минусовые значения/буквы для числа запрещены.\n";
                     break;
@@ -996,8 +967,26 @@ int main() {
             if (company.accessoryCount < max_items) {
                 cout << "Введите название аксессуара, стоимость, количество аксессуаров: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> price;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> production;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 if (production < 0 || price < 0) {
                     cout << "Минусовые значения/буквы для числа запрещены.\n";
                     break;
@@ -1015,6 +1004,12 @@ int main() {
             if (company.factoryCount > 0) {
                 cout << "Введите имя завода для удаления: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 company.RemoveFactory(name);
             }
             else {
@@ -1028,6 +1023,12 @@ int main() {
                 company.print_Supplier();
                 cout << "Введите имя поставщика для удаления: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 company.RemoveSupplier(name);
             }
             else {
@@ -1041,6 +1042,12 @@ int main() {
                 company.print_SalesPoint();
                 cout << "Введите название точки продаж для удаления: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 company.RemoveSalesPoint(name);
             }
             else {
@@ -1054,6 +1061,12 @@ int main() {
                 company.print_EquipmentFactory();
                 cout << "Введите название завода оборудования для удаления: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 company.RemoveEquipmentFactory(name);
             }
             else {
@@ -1067,6 +1080,12 @@ int main() {
                 company.print_Accessory();
                 cout << "Введите название аксессуара для удаления: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 company.RemoveAccessory(name);
             }
             else {
@@ -1080,9 +1099,33 @@ int main() {
                 company.print_Factory();
                 cout << "Введите через пробел имя завода которого вы хотите изменить, новое колво ноутбуков производимых в месяц, новая зп работника, новое колво работника: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> production;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> salary;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> workers;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 if (production < 0 || salary < 0 || workers < 0) {
                     cout << "Минусовые значения/буквы для числа запрещены.\n";
                     break;
@@ -1100,7 +1143,19 @@ int main() {
                 company.print_Supplier();
                 cout << "Введите через пробел имя поставщика, новую стоимость поставщика: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> cost;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 if (cost < 0) {
                     cout << "Минусовые значения/буквы для числа запрещены.\n";
                     break;
@@ -1118,12 +1173,24 @@ int main() {
                 company.print_SalesPoint();
                 cout << "Введите через пробел название точки продаж, новую цену одного ноутбука: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> price;
-                company.UpdateSalesPoint(name, price);
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 if (price < 0) {
                     cout << "Минусовые значения/буквы для числа запрещены.\n";
                     break;
                 }
+                company.UpdateSalesPoint(name, price);
             }
             else {
                 cout << "У вас нет точек продаж для обновления.\n";
@@ -1136,7 +1203,19 @@ int main() {
                 company.print_EquipmentFactory();
                 cout << "Введите через пробел название точки продаж, новую цену оборудования: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> cost;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 if (cost < 0) {
                     cout << "Минусовые значения/буквы для числа запрещены.\n";
                     break;
@@ -1154,8 +1233,26 @@ int main() {
                 company.print_Accessory();
                 cout << "Введите название аксессуара, новую стоимость, новое количество аксессуаров: ";
                 cin >> name;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> price;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 cin >> production;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(32767, '\n');
+                    cout << "Неверный ввод.\n";
+                    break;
+                }
                 if (production < 0 || price < 0) {
                     cout << "Минусовые значения/буквы для числа запрещены.\n";
                     break;
